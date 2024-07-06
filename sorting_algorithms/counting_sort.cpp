@@ -1,72 +1,38 @@
 #include <iostream>
 #include <vector>
-#include <limits>
 
-std::pair<int, int> min_max(std::vector<int>& vec)
+void counting_sort(int* arr, int size) 
 {
-    int max = std::numeric_limits<int>::min();
-    int min = std::numeric_limits<int>::max();
-
-    for (auto elem : vec)
-    {
-        if (elem < min)
-        {
-            min = elem;
-        }
-        if (elem > max)
-        {
-            max = elem;
+    int max = arr[0];
+    for(int i = 1; i < size; ++i) {
+        if(max < arr[i]) {
+            max = arr[i];
         }
     }
-    return { min, max };
-}
-
-void counting_sort(std::vector<int>& vec)
-{
-    if (vec.size() <= 1)
-    {
-        return;
+    std::vector<int> output(size);
+    std::vector<int> count(max + 1, 0); 
+    for(int i = 0; i < size; ++i) {
+        ++count[arr[i]];
     }
-    auto [min, max] = min_max(vec);
-    int range       = max - min + 1;
-    std::vector<int> tmp(range, 0);
-    std::vector<int> res(vec.size());
-    for (int i = 0; i < vec.size(); ++i)
-    {
-        ++tmp[vec[i] - min];
+    for(int i = 1; i <= max; ++i) {
+        count[i] += count[i - 1];
     }
-    for (int i = 1; i < range; ++i)
-    {
-        tmp[i] += tmp[i - 1];
+    for(int i = size - 1; i >= 0; --i) {
+        output[count[arr[i]] - 1] = arr[i];
+        --count[arr[i]];
     }
-    for (int i = vec.size() - 1; i >= 0; --i)
-    {
-        res[tmp[vec[i] - min] - 1] = vec[i];
-        --tmp[vec[i] - min];
-    }
-    for (int i = 0; i < vec.size(); ++i)
-    {
-        vec[i] = res[i];
+    for(int i = 0; i < size; ++i) {
+        arr[i] = output[i];
     }
 }
 
-int main(){
-    std::vector<int> vec = {-10, 4, 2, 2, -29, 8, 3, 3, 1};
-    std::cout << "Original vector: ";
-    for (int num : vec)
-    {
-        std::cout << num << " ";
+int main() {
+    int arr[] = {4, 2, 2, 8, 3, 3, 1};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    counting_sort(arr, size);
+    for(int i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
     }
-    std::cout << std::endl;
-
-    counting_sort(vec);
-
-    std::cout << "Sorted vector: ";
-    for (int num : vec)
-    {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-
+	std::cout << std::endl;
     return 0;
 }
