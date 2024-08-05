@@ -29,11 +29,14 @@ int main() {
     std::cout << "Inorder traversal: ";
     bst.inorderTraverse();
     std::cout << std::endl;
-
+    bst.levelorderTraverse();
+    bst.remove(4);
+    bst.levelorderTraverse();
     bst.clear();
     std::cout << "Tree cleared." << std::endl;
 
     std::cout << "Is the tree empty now? " << (bst.isEmpty() ? "Yes" : "No") << std::endl;
-
-    return 0;
+    bst.postorderTraverse();
+    
+    
 }

@@ -28,6 +28,10 @@ class BST {
         bool contains(T data) const; // Method to check if the tree contains a given data
         void preorderTraverse() const; // Method to traverse the tree in pre-order
         void inorderTraverse() const; // Method to traverse the tree in in-order
+        void postorderTraverse() const;
+        void levelorderTraverse() const;
+        void remove(T key);
+
     
     private:
         int getHeight(TreeNode<T>* node);
@@ -38,6 +42,10 @@ class BST {
         bool contains(TreeNode<T>* node, T data) const;
         void preorderTraverse(TreeNode<T>* node) const;
         void inorderTraverse(TreeNode<T>* node) const;
+        void postorderTraverse(TreeNode<T>* node) const;
+        TreeNode<T>* remove(TreeNode<T>* node, T key);
+        TreeNode<T>* minValueNode(TreeNode<T>* node);
+
 
     private:
         TreeNode<T>* m_root;

@@ -370,7 +370,136 @@ void BST<T>::inorderTraverse(TreeNode<T>* node) const {
 //     }
 // }
 
+template<typename T>
+void BST<T>::postorderTraverse() const {
+    postorderTraverse(m_root);
+    std::cout << std::endl;
+}
 
+template<typename T>
+void BST<T>::postorderTraverse(TreeNode<T>* node) const {
+    if (node == nullptr) {
+        return;
+    }
+    postorderTraverse(node->m_left);
+    postorderTraverse(node->m_right);
+    std::cout << node->m_data << " ";
+}
+
+//    IN ITERATIVE WAYS
+
+// template<typename T>
+//  void BST<T>::postorderTraverse() const {
+//     if(m_root == nullptr) {
+//         return;
+//     }
+//     std::stack<TreeNode<T>*> st;
+//     st.push(m_root);
+//     std::stack<T> out;
+//     while(!st.empty()){
+//         TreeNode<T>* node = st.top();
+//         st.pop();
+//         out.push(node->m_data);
+//         if(node->m_left!= nullptr) {
+//             st.push(node->m_left);
+//         }
+//         if(node->m_right != nullptr) {
+//             st.push(node->m_right);
+//         }
+//     }
+//     while (!out.empty()) {
+//         std::cout << out.top() << " ";
+//         out.pop();
+//     }
+//     std::cout << std::endl;
+//  }
+
+
+template<typename T>
+  void BST<T>::levelorderTraverse() const {
+    if(m_root == nullptr) {
+        return;
+    }
+    std::queue<TreeNode<T>*> q;
+    q.push(m_root);
+    while(!q.empty()) {
+        TreeNode<T>* node = q.front();
+        q.pop();
+        std::cout<< node->m_data << " ";
+        if(node->m_left != nullptr) {
+            q.push(node->m_left);
+        }
+        if(node->m_right != nullptr) {
+            q.push(node->m_right);
+        }
+    }
+    std::cout << std::endl;
+ }
+
+// template<typename T>
+// TreeNode<T>* BST<T>::remove(TreeNode<T>* node, T key) {
+//     if(node == nullptr) {
+//         return node;
+//     } else if (node->data > key) {
+//         return remove(node->left, key);
+//     } else if(node->data < key) {
+//         return remove(node->right, key;
+//     } else {
+//         if(node->left == nullptr) {
+//             treeNode* tmp = node->right;
+//             delete node;
+//             node = tmp;
+//         } else if(node_.right == nullptr) {
+//             treeNode* tmp = node->left;
+//             delete node;
+//             node = tmp;
+//         } else {
+
+//         }
+//     }
+// }
+
+template<typename T>
+void BST<T>::remove(T key) {
+    m_root = remove(m_root, key);
+}
+
+template<typename T>
+TreeNode<T>* BST<T>::remove(TreeNode<T>* node, T key) {
+    if (node == nullptr) {
+        return node; 
+    }
+    
+    if (key < node->m_data) {
+        node->m_left = remove(node->m_left, key);
+    } else if (key > node->m_data) {
+        node->m_right = remove(node->m_right, key);
+    } else {
+        if (node->m_left == nullptr) {
+            TreeNode<T>* tmp = node->m_right;
+            delete node;
+            return tmp;
+        } else if (node->m_right == nullptr) {
+            TreeNode<T>* tmp = node->m_left;
+            delete node;
+            return tmp;
+        } else {
+            TreeNode<T>* successor = minValueNode(node->m_right);
+            node->m_data = successor->m_data;
+            node->m_right = remove(node->m_right, successor->m_data);
+        }
+    }
+    return node;
+}
+
+template<typename T>
+TreeNode<T>* BST<T>::minValueNode(TreeNode<T>* node) {
+    TreeNode<T>* current = node;
+    while (current && current->m_left != nullptr) {
+        current = current->m_left;
+    }
+    return current;
+}
 
 
 #endif // BINARYSEARCHTREE_HPP
