@@ -102,14 +102,14 @@ int BST<T>::getNumberOfNodes(TreeNode<T>* node) {
 //     std::queue<TreeNode<T>*> q;
 //     q.push(m_root);
 //     while (!q.empty()) {
-//         TreeNode<T>* current = q.front();  // Получаем указатель на узел, находящийся в начале очереди
-//         q.pop();  // Удаляем этот узел из очереди
-//         count++;  // Увеличиваем счётчик узлов
+//         TreeNode<T>* current = q.front();  
+//         q.pop();  
+//         ++count;  
 //         if (current->m_left != nullptr) {
-//             q.push(current->m_left);  // Добавляем левый дочерний узел в очередь
+//             q.push(current->m_left);  
 //         }
 //         if (current->m_right != nullptr) {
-//             q.push(current->m_right);  // Добавляем правый дочерний узел в очередь
+//             q.push(current->m_right);  
 //         }
 //     }
 //     return count;
@@ -434,30 +434,7 @@ template<typename T>
         }
     }
     std::cout << std::endl;
- }
-
-// template<typename T>
-// TreeNode<T>* BST<T>::remove(TreeNode<T>* node, T key) {
-//     if(node == nullptr) {
-//         return node;
-//     } else if (node->data > key) {
-//         return remove(node->left, key);
-//     } else if(node->data < key) {
-//         return remove(node->right, key;
-//     } else {
-//         if(node->left == nullptr) {
-//             treeNode* tmp = node->right;
-//             delete node;
-//             node = tmp;
-//         } else if(node_.right == nullptr) {
-//             treeNode* tmp = node->left;
-//             delete node;
-//             node = tmp;
-//         } else {
-
-//         }
-//     }
-// }
+}
 
 template<typename T>
 void BST<T>::remove(T key) {
