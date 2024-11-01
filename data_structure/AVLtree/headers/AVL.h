@@ -24,6 +24,9 @@ public:
 	int getHeight(TreeNode<T>* node);
 	void inOrderTraversal() const; 
 	void preorder();
+	bool inbalance(TreeNode<T>* root);
+
+
 
 private:
 	TreeNode<T>* insert(TreeNode<T>* node,  T value);

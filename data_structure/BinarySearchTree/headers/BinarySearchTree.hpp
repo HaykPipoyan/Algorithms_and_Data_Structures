@@ -347,7 +347,7 @@ template<typename T>
 void BST<T>::inorderTraverse(TreeNode<T>* node) const {
     if (node != nullptr) {
         inorderTraverse(node->m_left);
-        std::cout << node->m_data << " ";
+        std::cout << node->m_data << " " << std::endl;
         inorderTraverse(node->m_right);
     }
 }

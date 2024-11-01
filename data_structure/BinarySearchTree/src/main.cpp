@@ -37,6 +37,6 @@ int main() {
 
     std::cout << "Is the tree empty now? " << (bst.isEmpty() ? "Yes" : "No") << std::endl;
     bst.postorderTraverse();
-    
+   
     
 }
